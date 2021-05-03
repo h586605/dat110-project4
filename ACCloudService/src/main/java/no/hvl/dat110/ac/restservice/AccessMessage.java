@@ -19,4 +19,9 @@ public class AccessMessage {
 		this.message = message;
 	}
 
+	@Override
+	public String toString() {
+		return "AccessMessage [message=" + message + "]";
+	}
+
 }
