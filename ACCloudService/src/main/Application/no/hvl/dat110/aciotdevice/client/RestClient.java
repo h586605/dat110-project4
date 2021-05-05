@@ -15,6 +15,7 @@ public class RestClient {
 
 	private static String logpath = "/accessdevice/log";
 
+	@SuppressWarnings("deprecation")
 	public void doPostAccessEntry(String message) {
 
 		String accessentry = new Gson().toJson(new AccessMessage(message));
@@ -41,9 +42,7 @@ public class RestClient {
 	public AccessCode doGetAccessCode() {
 
 		AccessCode accessCode = null;
-		String responseBody;
 		
-		try{
 			Gson gson = new Gson();
 
 			OkHttpClient client = new OkHttpClient();
@@ -53,7 +52,7 @@ public class RestClient {
 					.build();
 
 			try (Response response = client.newCall(request).execute()) {
-				responseBody = response.body().string();
+				String responseBody = response.body().string();
 				System.out.println (responseBody);
 				accessCode = gson.fromJson(responseBody, AccessCode.class);
 			}
@@ -61,9 +60,6 @@ public class RestClient {
 				e.printStackTrace();
 			}
 
-		} catch (Exception e){
-			System.out.println(e);
-		}
 		return accessCode;
 	}
 	

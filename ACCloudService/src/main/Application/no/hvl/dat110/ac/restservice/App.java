@@ -26,7 +26,6 @@ public class App {
 		} else {
 			port(8080);
 		}
-
 		// objects for data stored in the service
 		
 		accesslog = new AccessLog();
@@ -77,7 +76,7 @@ public class App {
 			
 			Gson gson = new Gson();
 			
-			AccessCode accessCodeNew = gson.fromJson(req.body() , AccessCode.class);
+			AccessCode accessCodeNew = gson.fromJson(req.body(), AccessCode.class);
 			
 			accesscode = accessCodeNew;
 			
