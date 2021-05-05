@@ -8,19 +8,16 @@ import okhttp3.*;
 
 public class RestClient {
 
-	public RestClient() {
-		// TODO Auto-generated constructor stub
-		
-	}
+	public static final MediaType JSON
+    = MediaType.parse("application/json; charset=utf-8");
 
 	private static String logpath = "/accessdevice/log";
 
-	@SuppressWarnings("deprecation")
 	public void doPostAccessEntry(String message) {
 
 		String accessentry = new Gson().toJson(new AccessMessage(message));
 		
-		RequestBody accessentryBody = RequestBody.create(MediaType.parse("application/json"), accessentry);
+		RequestBody accessentryBody = RequestBody.create(accessentry, JSON);
 		
 		OkHttpClient client = new OkHttpClient();
 
@@ -41,9 +38,7 @@ public class RestClient {
 	
 	public AccessCode doGetAccessCode() {
 
-		AccessCode accessCode = null;
-		
-			Gson gson = new Gson();
+			AccessCode accessCode = null;
 
 			OkHttpClient client = new OkHttpClient();
 
@@ -54,7 +49,7 @@ public class RestClient {
 			try (Response response = client.newCall(request).execute()) {
 				String responseBody = response.body().string();
 				System.out.println (responseBody);
-				accessCode = gson.fromJson(responseBody, AccessCode.class);
+				accessCode = new Gson().fromJson(responseBody, AccessCode.class);
 			}
 			catch (IOException e) {
 				e.printStackTrace();
