@@ -13,11 +13,12 @@ public class RestClient {
 
 	private static String logpath = "/accessdevice/log";
 
+	@SuppressWarnings("deprecation")
 	public void doPostAccessEntry(String message) {
 
 		String accessentry = new Gson().toJson(new AccessMessage(message));
 		
-		RequestBody accessentryBody = RequestBody.create(accessentry, JSON);
+		RequestBody accessentryBody = RequestBody.create(JSON, accessentry);
 		
 		OkHttpClient client = new OkHttpClient();
 
